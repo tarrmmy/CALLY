@@ -20,44 +20,52 @@ const SignUp = () => {
   };
 
   return (
-    <div className='flex items-center'>
+    <div className='flex'>
         <div className='bg-lblue min-h-[100vh]  w-1/2'>
-          <img src={register} />
+          <img className='mx-auto py-8' src={register} />
         </div>
-        <div className=' pl-10'>
-          <p>Already have an account? <u className='font-bold'>Sign In</u></p>
-          <h1>Welcome to Abdul-Mujeeb BlockChain</h1>
-          <p>Register your account</p>
+        <div className='px-12'>
+          {/* <p className='text-right'>Already have an account? <u className='font-bold'>Sign In</u></p> */}
+          <h1 className='text-3xl py-3 font-bold'>Welcome to Abdul-Mujeeb BlockChain</h1>
+          <p className='pb-4'>Register your account</p>
           <form onSubmit={handleSignUp}>
-            <label>Name</label>
-            <div className='flex space-x-4 py-4'>
+            <label className='mb-4 font-bold'>Name</label>
+            <div className='space-x-4'>
               <input
                 className='w-48 py-2 pl-2 rounded-tl-lg rounded-br-lg  border-2 border-dblue'
                 type="name"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                // onChange={(e) => setEmail(e.target.value)}
                 placeholder="First Name"
               />
               <input
                 className='w-48 py-2 pl-2 rounded-tl-lg rounded-br-lg  border-2 border-dblue'
                 type="name"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                // onChange={(e) => setEmail(e.target.value)}
                 placeholder="Last Name"
               />
             </div>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-            />
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-            />
+            <label className='mb-4 font-bold'>Email Address</label>
+            <div className=''>
+              <input
+                type="email"
+                value={email}
+                // onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                className='w-full py-2 my-3 pl-2 rounded-tl-lg rounded-br-lg  border-2 border-dblue'
+              />
+            </div>
+            <label className='mb-4 font-bold'>Email Address</label>
+            <div>
+              <input
+                type="password"
+                value={password}
+                // onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                className='w-3/4 py-2 pl-2 rounded-tl-lg rounded-br-lg  border-2 border-dblue'
+              />
+            </div>
             <button type="submit">Sign Up</button>
             {error && <p>{error}</p>}
           </form>
