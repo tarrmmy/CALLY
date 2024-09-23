@@ -18,8 +18,14 @@ function App() {
                 Steps: { colorPrimary: "#F5A302" },
                 Switch: { colorPrimary: "#32A071" },
                 Checkbox: { colorPrimary: "#004EC4" },
-                Modal: { boxShadow: "0px", boxShadowSecondary: "0px", boxShadowTertiary: "0px" }
-            }}}>
+                Modal: {
+                  boxShadow: "0px",
+                  boxShadowSecondary: "0px",
+                  boxShadowTertiary: "0px",
+                },
+              },
+            }}
+          >
             <CustomRoutes />
           </ConfigProvider>
         </QueryClientProvider>
