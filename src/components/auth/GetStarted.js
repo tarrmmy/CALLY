@@ -1,6 +1,7 @@
 import React from "react";
 import home from "../../images/logo1.png";
 import logo from "../../images/logo1.png";
+import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 
@@ -30,19 +31,16 @@ const GetStarted = () => {
           </div>
 
           <div className="flex flex-col justify-center items-center gap-4">
-            <button
-              className="w-[400px] rounded-tl-2xl rounded-br-2xl bg-dblue text-white py-3 hover:opacity-90 font-semibold"
-              onClick={() => navigate("/sign-in")}
-            >
-              Sign In
-            </button>
-
-            <button
-              className="w-[400px] rounded-tl-2xl rounded-br-2xl py-3 border border-dblue hover:bg-dblue hover:text-white font-semibold"
-              onClick={() => navigate("/sign-up")}
-            >
-              Sign Up
-            </button>
+            <Link to="/auth/sign-in">
+              <button className=" active:scale-95 w-[400px] rounded-tl-2xl rounded-br-2xl bg-dblue text-white py-3 hover:opacity-90 font-semibold">
+                Sign In
+              </button>
+            </Link>
+            <Link to="/auth/sign-up">
+              <button className="active:scale-95 w-[400px] rounded-tl-2xl rounded-br-2xl py-3 border border-dblue hover:bg-dblue hover:text-white font-semibold">
+                Sign Up
+              </button>
+            </Link>
           </div>
         </div>
       </div>

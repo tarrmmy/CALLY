@@ -1,24 +1,37 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import GetStarted from "./components/auth/GetStarted.js";
-import SignIn from "./components/auth/SignIn.js";
-import SignUp from "./components/auth/SignUp.js";
-import VerifyEmail from "./components/auth/VerifyEmail.js";
-import ForgotPassword from "./components/auth/ForgotPassword.js";
-import VerifyOTP from "./components/auth/VerifyOOP.js";
+import { RecoilRoot } from "recoil";
+import { BrowserRouter as Router } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+// import AxiosContextProvider from "./context/AxiosContext";
+import CustomRoutes from "./components/router";
+import { ConfigProvider } from "antd";
 
-const App = () => {
+const queryClient = new QueryClient();
+function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<GetStarted />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/verify-email" element={<VerifyEmail />} />
-        <Route path="/verify-otp" element={<VerifyOTP />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-      </Routes>
-    </Router>
+    <RecoilRoot>
+      <Router>
+        <QueryClientProvider client={queryClient}>
+          <ConfigProvider
+            theme={{
+              components: {
+                Menu: { colorPrimary: "#344054" },
+                Steps: { colorPrimary: "#F5A302" },
+                Switch: { colorPrimary: "#32A071" },
+                Checkbox: { colorPrimary: "#004EC4" },
+                Modal: {
+                  boxShadow: "0px",
+                  boxShadowSecondary: "0px",
+                  boxShadowTertiary: "0px",
+                },
+              },
+            }}
+          >
+            <CustomRoutes />
+          </ConfigProvider>
+        </QueryClientProvider>
+      </Router>
+    </RecoilRoot>
   );
-};
+}
 
 export default App;
