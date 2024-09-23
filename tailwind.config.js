@@ -14,8 +14,8 @@ module.exports = {
       colors: {
         "dblue": '#09002B',
         "lblue": '#183180',
-        light_blue: "#004EC4",
-        dark_blue: "#04142F",
+        "light_blue": "#004EC4",
+        "dark_blue": "#04142F",
         secondary: "#202E46",
         yellow: "#F5A302",
         silver: "#596476",

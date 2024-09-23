@@ -2,7 +2,12 @@ import React, { useMemo } from 'react'
 import Logo from '../components/logo'
 import { Drawer, Menu } from 'antd'
 import { Link, useLocation } from 'react-router-dom'
-import dashboardIcon from '../images/dashboard.svg'
+import dashboardIcon from '../images/icons/dashboard.svg'
+import walletIcon from '../images/icons/wallet.svg'
+import buyIcon from '../images/icons/buy.svg'
+import sendIcon from '../images/icons/send.svg'
+import transactionIcon from '../images/icons/transaction.svg'
+import contactIcon from '../images/icons/contact.svg'
 
 function Sidebar({
   isOpen,
@@ -19,27 +24,27 @@ function Sidebar({
     {
         key: "/wallet",
         label: <Link to="/wallet">Wallet</Link>,
-        icon: <img alt='wallet' src={dashboardIcon} />,
+        icon: <img alt='wallet' src={walletIcon} />,
     },
     {
         key: "/send-receive",
         label: <Link to="/send-receive">Send/Receive</Link>,
-        icon: <img alt='sendreceive' src={dashboardIcon} />,
+        icon: <img alt='sendreceive' src={sendIcon} />,
     },
     {
         key: "/buy-sell",
         label: <Link to="/buy-sell">Buy/Sell</Link>,
-        icon: <img alt='buysell' src={dashboardIcon} />,
+        icon: <img alt='buysell' src={buyIcon} />,
     },
     {
         key: "/transaction",
         label: <Link to="/transaction">Transaction</Link>,
-        icon: <img alt='transaction' src={dashboardIcon} />,
+        icon: <img alt='transaction' src={transactionIcon} />,
     },
     {
         key: "/contact",
         label: <Link to="/contact">Contact</Link>,
-        icon: <img alt='contact' src={dashboardIcon} />,
+        icon: <img alt='contact' src={contactIcon} />,
     },
   ], []);
 
