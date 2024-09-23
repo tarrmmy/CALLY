@@ -1,23 +1,24 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import GetStarted from './components/auth/GetStarted.js'
-import SignIn from './components/auth/SignIn.js'
-import SignUp from './components/auth/SignUp.js'
-import VerifyEmail from './components/auth/VerifyEmail.js'
-import ForgotPassword from './components/auth/ForgotPassword.js'
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import GetStarted from "./components/auth/GetStarted.js";
+import SignIn from "./components/auth/SignIn.js";
+import SignUp from "./components/auth/SignUp.js";
+import VerifyEmail from "./components/auth/VerifyEmail.js";
+import ForgotPassword from "./components/auth/ForgotPassword.js";
+import VerifyOTP from "./components/auth/VerifyOOP.js";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<GetStarted />}/>
+        <Route path="/" element={<GetStarted />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/verify-otp" element={<VerifyOTP />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;
