@@ -70,7 +70,7 @@ export const routes = [
   // },
   {
     label: "Welcome",
-    path: "/auth/welcome",
+    path: "/welcome",
     component: <WelcomePage />,
   },
   {
