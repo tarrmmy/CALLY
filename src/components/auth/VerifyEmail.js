@@ -3,18 +3,15 @@ import logo from "../../images/logo1.png";
 import verifyImage from "../../images/verify.svg";
 import { Link } from "react-router-dom";
 import { Form, Input, Button } from "antd";
+import { LogoText } from "../LogoText";
 
 const VerifyEmail = () => {
   const [contactType, setContactType] = useState("email");
+  const [form] = Form.useForm();
   return (
     <div className="flex items-center">
       <div className="absolute w-full flex justify-between items-center z-10 top-0 p-6 py-8">
-        <div className=" flex justify-start items-center">
-          <img src={logo} width={72} height={55} alt="verify email" />
-          <span className="text-base font-bold max-w-[151px] text-white leading-tight m-0">
-            ABDULMUJEEB BLOCKCHAIN
-          </span>
-        </div>
+        <LogoText />
         <p>
           Already have an acoount?{""}
           <Link to="#" className="font-semibold underline">
@@ -32,10 +29,15 @@ const VerifyEmail = () => {
           <h1 className="text-2xl font-bold">
             Welcome to Abdul-Mujeeb BlockChain
           </h1>
-          <p>Register your account</p>
+          <p>Fill in your detail</p>
         </div>
         <div className="w-full">
-          <Form className="px-4 w-full flex flex-col gap-8" layout="vertical">
+          <Form
+            className="px-4 w-full flex flex-col gap-8"
+            layout="vertical"
+            form={form}
+            onFinish={() => alert("Working here")}
+          >
             <div className="flex justify-start gap-5 w-full">
               <Form.Item
                 layout="vertical"
@@ -122,7 +124,7 @@ const VerifyEmail = () => {
               <Button
                 type="submit"
                 variant="large"
-                className="!w-[380px] !rounded-none !rounded-tl-2xl !rounded-br-2xl !bg-dblue !text-white h-[50px] hover:!opacity-90 !font-semibold hover:!border-none active:scale-95"
+                className="!w-[400px] text-lg !rounded-none !rounded-tl-2xl !rounded-br-2xl !bg-dblue !text-white h-[50px] hover:!opacity-90 !font-semibold hover:!border-none active:scale-95"
               >
                 Verify Email
               </Button>

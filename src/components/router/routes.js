@@ -3,12 +3,13 @@ import { lazy } from "react";
 // Authentication Pages
 const GetStarted = lazy(() => import("./../auth/GetStarted"));
 const LoginPage = lazy(() => import("../../components/auth/SignIn"));
-const ConfirmPage = lazy(() => import("../../components/auth/VerifyEmail"));
 const ForgotPassword = lazy(() =>
   import("../../components/auth/ForgotPassword")
 );
 const Logout = lazy(() => import("../../components/auth/Logout"));
 const VerifyEmail = lazy(() => import("./../auth/VerifyEmail"));
+const VerifyOtp = lazy(() => import("./../auth/VerifyOOP"));
+const WelcomePage = lazy(() => import("./../auth/welcome"));
 
 // Sidebars Pages
 const Dashboard = lazy(() => import("../pages/main/Dashboard"));
@@ -67,18 +68,23 @@ export const routes = [
   //   path: "/auth/reset-password",
   //   component: <ResetPage />
   // },
-  // {
-  //   label: "OTP",
-  //   path: "/auth/otp",
-  //   component: <OTPPage />
-  // },
+  {
+    label: "Welcome",
+    path: "/auth/welcome",
+    component: <WelcomePage />,
+  },
+  {
+    label: "Verify OTP",
+    path: "/auth/verify-otp",
+    component: <VerifyOtp />,
+  },
   {
     label: "Get Started",
     path: "/auth/get-started",
     component: <GetStarted />,
   },
   {
-    label: "OTP",
+    label: "Verify Email",
     path: "/auth/verify-email",
     component: <VerifyEmail />,
   },
@@ -88,10 +94,3 @@ export const routes = [
     component: <Logout />,
   },
 ];
-
-// <Route path="/" element={<GetStarted />}/>
-// <Route path="/sign-in" element={<SignIn />} />
-// <Route path="/sign-up" element={<SignUp />} />
-// <Route path="/verify-email" element={<VerifyEmail />} />
-// <Route path="/forgot-password" element={<ForgotPassword />} />
-// <Route path="/dashboard" element={<Dashboard />} />
