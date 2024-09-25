@@ -15,8 +15,9 @@ const Layouts = {
 const Layout = ({ children }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { isLoggedIn } = useRecoilValue(authAtom);
+  const { isLoggedIn, user } = useRecoilValue(authAtom);
   const [pPath, setPPath] = useState(document.referrer);
+  console.log(isLoggedIn, user);
 
   // NProgress & ScrollTop Management
   const currentPath = pathname;
