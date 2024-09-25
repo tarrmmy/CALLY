@@ -77,7 +77,7 @@ export const routes = [
   // },
   {
     label: "Welcome",
-    path: "/welcome",
+    path: "/main/welcome",
     component: <WelcomePage />,
   },
   {
@@ -92,7 +92,7 @@ export const routes = [
   },
   {
     label: "Get Started",
-    path: "/main/get-started",
+    path: "/auth/get-started",
     component: <GetStarted />,
   },
   {
