@@ -6,9 +6,9 @@ const LogoText = ({ color }) => {
     <div className=" flex justify-start items-center">
       <img src={logo} width={60} height={55} alt="verify email" />
       <span
-        className={`text-[14px] font-bold max-w-[151px] leading-tight m-0  text-white`}
+        className={`text-[14px] font-bold !w-[101px] leading-tight m-0  text-white`}
       >
-        ABDULMUJEEB BLOCKCHAIN
+        ABDULMUJEEB <br /> BLOCKCHAIN
       </span>
     </div>
   );

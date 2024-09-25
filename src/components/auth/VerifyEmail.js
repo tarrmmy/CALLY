@@ -13,7 +13,7 @@ const VerifyEmail = () => {
       <div className="absolute w-full flex justify-between items-center z-10 top-0 p-6 py-8">
         <LogoText />
         <p>
-          Already have an acoount?{""}
+          Already have an acoount?
           <Link to="#" className="font-semibold underline">
             Sign In
           </Link>

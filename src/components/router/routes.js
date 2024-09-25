@@ -3,6 +3,7 @@ import { lazy } from "react";
 // Authentication Pages
 const GetStarted = lazy(() => import("./../auth/GetStarted"));
 const LoginPage = lazy(() => import("../../components/auth/SignIn"));
+const SignUpPage = lazy(() => import("../../components/auth/SignUp"));
 const ForgotPassword = lazy(() =>
   import("../../components/auth/ForgotPassword")
 );
@@ -22,32 +23,32 @@ const Contact = lazy(() => import("../pages/main/Contact"));
 export const routes = [
   // main pages with no initial path
   {
-    path: "/dashboard",
+    path: "/main/dashboard",
     label: "Dashboard",
     component: <Dashboard />,
   },
   {
-    path: "/wallet",
+    path: "/main/wallet",
     label: "Wallet",
     component: <Wallet />,
   },
   {
-    path: "/send-receive",
+    path: "/main/send-receive",
     label: "Send/Receive",
     component: <SendReceive />,
   },
   {
-    path: "/buy-sell",
+    path: "/main/buy-sell",
     label: "Buy/Sell",
     component: <BuySell />,
   },
   {
-    path: "/transaction",
+    path: "/main/transaction",
     label: "Transaction",
     component: <Transaction />,
   },
   {
-    path: "/contact",
+    path: "/main/contact",
     label: "Contact",
     component: <Contact />,
   },
@@ -57,6 +58,11 @@ export const routes = [
     label: "Login",
     path: "/auth/sign-in",
     component: <LoginPage />,
+  },
+  {
+    label: "SignUp page",
+    path: "/auth/sign-up",
+    component: <SignUpPage />,
   },
   {
     label: "Forget Password",

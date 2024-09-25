@@ -5,21 +5,30 @@ import { Form, Input, Button, Checkbox } from "antd";
 import welcomeImg from "./../../images/SignIn.svg";
 import { LogoText } from "../LogoText";
 import logo from "../../images/logo1.png";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import authAtom from "../atoms/auth.atom";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const setAuth = useSetRecoilState(authAtom);
 
-  const handleSignIn = () => {
-    // e.preventDefault();
-    // try {
-    //   await signInWithEmailAndPassword(auth);
-    //   navigate("/dashboard"); // redirect after successful sign-in
-    // } catch (error) {
-    //   console.error("Error signing in:", error.message);
-    // }
-    // console.log(e);
-    alert("twale");
+  const handleSignIn = async (e) => {
+    console.log(e);
+    const email = e.email;
+    const password = e.password;
+    try {
+      await signInWithEmailAndPassword(auth, email, password).then((res) => {
+        if (res) {
+          setAuth({ ...authAtom, isLoggedIn: true, user: res });
+          navigate("/main/dashboard");
+        }
+        console.log(res);
+      });
+      // redirect after successful sign-in
+    } catch (error) {
+      console.error("Error signing in:", error.message);
+    }
   };
 
   return (
@@ -27,9 +36,9 @@ const SignIn = () => {
       <div className="absolute w-full flex justify-between items-center z-10 top-0 p-6 py-8">
         <LogoText />
         <p>
-          Already have an acoount?{""}
-          <Link to="#" className="font-semibold underline">
-            Sign In
+          Don't have an acoount?{""}
+          <Link to="/auth/sign-up" className="font-semibold underline">
+            Sign Up
           </Link>
         </p>
       </div>
@@ -49,42 +58,37 @@ const SignIn = () => {
           <h1 className="text-2xl font-bold">
             Welcome to Abdul-Mujeeb BlockChain
           </h1>
-          <p>Register your account</p>
+          <p>Signin to your account</p>
         </div>
         <div className="w-full">
           <Form
             className="px-4 w-full flex flex-col gap-6"
             layout="vertical"
             form={form}
-            onFinish={() => alert("Baba to mo graphics")}
-            onFinishFailed={(errorInfo) => console.log("Failed:", errorInfo)}
+            onFinish={handleSignIn}
           >
             <Form.Item
               name="email"
               className="!m-0"
               label={
-                <label className="font-semibold text-sm">
-                  User name/Email address
-                </label>
+                <span className="font-semibold text-sm">Email Address</span>
               }
               rules={[{ required: true, message: "Please input your email!" }]}
             >
               <Input
-                type="text"
+                type="email"
                 className="w-full h-[45px] !rounded-tl-lg !rounded-br-lg"
-                placeholder="First name"
+                placeholder="Enter Email address"
               />
             </Form.Item>
             <Form.Item
               name="admin_id"
               className="!m-0"
               label={
-                <label className="font-semibold text-sm">
+                <span className="font-semibold text-sm">
                   Admin?
-                  <span className="text-[10px] font-light">
-                    Enter admin Id?
-                  </span>
-                </label>
+                  <span className="text-[10px] font-light">Enter admin Id</span>
+                </span>
               }
             >
               <Input
@@ -96,7 +100,7 @@ const SignIn = () => {
             <Form.Item
               className="!m-0"
               name="password"
-              label={<label className="font-semibold text-sm">Password</label>}
+              label={<span className="font-semibold text-sm">Password</span>}
               rules={[
                 { required: true, message: "Please input your password!" },
               ]}
@@ -107,15 +111,15 @@ const SignIn = () => {
                 placeholder="Enter Password"
               />
             </Form.Item>
-            <Checkbox>Save my login details.</Checkbox>
-            <div className="w-full flex justify-center items-center">
-              <Button
+            {/* <Checkbox className="-mt-3">Save my login details.</Checkbox> */}
+            <div className="w-full flex justify-center items-center ">
+              <button
                 type="submit"
-                variant="large"
+                // variant="large"
                 className="!w-[400px] text-lg !rounded-none !rounded-tl-2xl !rounded-br-2xl !bg-dblue !text-white h-[50px] hover:!opacity-90 !font-semibold hover:!border-none active:scale-95"
               >
                 Sign in
-              </Button>
+              </button>
             </div>
           </Form>
         </div>
