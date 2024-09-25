@@ -10,6 +10,7 @@ const ForgotPassword = lazy(() =>
 const Logout = lazy(() => import("../../components/auth/Logout"));
 const VerifyEmail = lazy(() => import("./../auth/VerifyEmail"));
 const VerifyOtp = lazy(() => import("./../auth/VerifyOOP"));
+const ConfirmVerification = lazy(() => import("./../auth/confirmVerification"));
 const WelcomePage = lazy(() => import("./../auth/welcome"));
 
 // Sidebars Pages
@@ -85,8 +86,13 @@ export const routes = [
     component: <VerifyOtp />,
   },
   {
+    label: "Verify Link",
+    path: "/auth/verify-link",
+    component: <ConfirmVerification />,
+  },
+  {
     label: "Get Started",
-    path: "/auth/get-started",
+    path: "/main/get-started",
     component: <GetStarted />,
   },
   {
