@@ -27,7 +27,7 @@ const GetStarted = () => {
                 Sign In
               </button>
             </Link>
-            <Link to="/auth/sign-up">
+            <Link to="/main/dashboard">
               <button className="active:scale-95 w-[400px] text-lg rounded-tl-2xl rounded-br-2xl py-3 border border-dblue hover:bg-dblue hover:text-white font-semibold">
                 Sign Up
               </button>

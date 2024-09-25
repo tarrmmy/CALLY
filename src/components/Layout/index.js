@@ -47,9 +47,14 @@ const Layout = ({ children }) => {
 
   // redirect to login page if current is not login page and user not authorized
   useEffect(() => {
-    if (isMainLayout && !isLoggedIn) {
+    if (isMainLayout && !isLoggedIn && !user?.user?.emailVerified) {
       navigate("/auth/get-started");
       message.info({ content: "Please login to proceed.", key: "updatable" });
+    }
+    if (isMainLayout && isLoggedIn && !user?.user?.emailVerified) {
+      message.error({
+        content: "Email not verified, check your mail for verification link!",
+      });
     }
   }, [isLoggedIn, isMainLayout, navigate]);
   return (
