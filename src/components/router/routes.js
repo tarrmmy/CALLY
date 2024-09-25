@@ -54,6 +54,7 @@ export const routes = [
     component: <Contact />,
   },
 
+  
   // authentication pages with initial path of /auth
   {
     label: "Login",
@@ -77,7 +78,7 @@ export const routes = [
   // },
   {
     label: "Welcome",
-    path: "/main/welcome",
+    path: "/welcome",
     component: <WelcomePage />,
   },
   {
