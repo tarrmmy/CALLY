@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore, collection } from "firebase/firestore";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCn6ndS1QXxg7iE2K5JYRDoRvPKNG8mYvQ",
@@ -13,3 +15,5 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);   
+export const db = getFirestore(app);
+export const walletCollection = collection(db, "Wallets");

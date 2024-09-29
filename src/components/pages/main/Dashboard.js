@@ -1,9 +1,15 @@
-import React from 'react';
+import { React, useEffect } from 'react';
 import { Table, Card } from 'antd';
+import { where, query, getDocs } from "firebase/firestore";
+import * as firebaseAuth from "firebase/auth";
+import { auth, walletCollection } from "../../../firebaseConfig";
+import authAtom from "../../atoms/auth.atom"
+import { useRecoilValue } from 'recoil';
 
 
 const Dashboard = () => {
 
+  const authAtomValue = useRecoilValue(authAtom)
   const columns = [
     {
       title: 'Asset',
@@ -57,6 +63,25 @@ const Dashboard = () => {
     },
   ]; 
 
+  const getWalletBalance = async () => {
+    auth.updateCurrentUser();
+    const user = authAtomValue.user.uid;
+    // auth.
+    console.log("User Data ::: ", user);
+    const q = query(walletCollection, where('user_id', '==', user ?? ""));
+    const snapshot = await getDocs(q);
+    console.log(snapshot.data);
+  }
+
+  useEffect(() => {
+    auth.authStateReady(async () => {
+      const user = await auth.currentUser;
+      if (user != undefined) {
+        getWalletBalance();
+      }
+    })
+  }, [])
+
   return (
     <div className='px-10'>
       <div className='flex'>
@@ -68,7 +93,7 @@ const Dashboard = () => {
           >
             <p>Card content</p>
             <p>Card content</p>
-            <p>Card content</p>
+            <p>{ auth.currentUser }</p>
           </Card>
         </div>
         <div className='w-1/4'>

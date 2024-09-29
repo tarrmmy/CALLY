@@ -11,6 +11,7 @@ export default atom({
   default: {
     isLoggedIn: false,
     user: null,
+    uid: null
   },
   effects_UNSTABLE: [persistAtom],
 });

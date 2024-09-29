@@ -20,7 +20,7 @@ const SignIn = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password).then((res) => {
         if (res) {
-          setAuth({ ...authAtom, isLoggedIn: true, user: res });
+          setAuth({ ...authAtom, isLoggedIn: true, user: res.user });
           navigate("/main/welcome");
         }
         console.log(res);

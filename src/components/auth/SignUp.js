@@ -3,16 +3,30 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
+import { db } from "../../firebaseConfig";
+
 import register from "../../images/register.png";
 import { LogoText } from "../LogoText";
 import { Link } from "react-router-dom";
 import { Form, Input, Checkbox, notification } from "antd";
 import { useNavigate } from "react-router-dom";
+import { addDoc, collection } from "firebase/firestore";
 
 const SignUp = () => {
   const [form] = Form.useForm();
   const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
+
+ const blockWallet = async (userId) => {
+  try {
+        const blockWallet = await addDoc(collection(db, 'wallets'), {
+          "user_id": userId,
+          "balance": 0
+        });
+  } catch (error) {
+    console.log(error, 'error')
+  }
+ } 
 
   const handleSignUp = async (e) => {
     if (e.password === e.confirm_password) {
@@ -23,10 +37,9 @@ const SignUp = () => {
               console.log(auth.currentUser);
               api.success({
                 message: "Account Created successfully!",
-                description:
-                  "Check your email for verification link to proceed, redirecting to login...",
+                description: "Check your email for verification link to proceed, redirecting to login...",
               });
-
+              blockWallet(auth.currentUser.uid);
               navigate("/auth/verify-link");
             });
           }
