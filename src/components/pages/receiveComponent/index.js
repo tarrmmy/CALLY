@@ -57,7 +57,7 @@ const Receive = () => {
               title={<p>{item.title}</p>}
               description={item.value}
             />
-            <CopyButton />
+            <CopyButton  />
           </List.Item>
         )}
       </VirtualList>
