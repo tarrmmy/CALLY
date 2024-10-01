@@ -18,32 +18,32 @@ function Sidebar({
   const items = useMemo(() => [
     {
         key: "/dashboard",
-        label: <Link to="/dashboard">Dashboard</Link>,
+        label: <Link to="/main/dashboard">Dashboard</Link>,
         icon: <img alt='dashboard' src={dashboardIcon} />,
     },
     {
         key: "/wallet",
-        label: <Link to="/wallet">Wallet</Link>,
+        label: <Link to="/main/wallet">Wallet</Link>,
         icon: <img alt='wallet' src={walletIcon} />,
     },
     {
         key: "/send-receive",
-        label: <Link to="/send-receive">Send/Receive</Link>,
+        label: <Link to="/main/send-receive">Send/Receive</Link>,
         icon: <img alt='sendreceive' src={sendIcon} />,
     },
     {
         key: "/buy-sell",
-        label: <Link to="/buy-sell">Buy/Sell</Link>,
+        label: <Link to="/main/buy-sell">Buy/Sell</Link>,
         icon: <img alt='buysell' src={buyIcon} />,
     },
     {
         key: "/transaction",
-        label: <Link to="/transaction">Transaction</Link>,
+        label: <Link to="/main/transaction">Transaction</Link>,
         icon: <img alt='transaction' src={transactionIcon} />,
     },
     {
         key: "/contact",
-        label: <Link to="/contact">Contact</Link>,
+        label: <Link to="/main/contact">Contact</Link>,
         icon: <img alt='contact' src={contactIcon} />,
     },
   ], []);

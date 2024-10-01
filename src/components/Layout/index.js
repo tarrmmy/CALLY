@@ -52,9 +52,9 @@ const Layout = ({ children }) => {
       message.info({ content: "Please login to proceed.", key: "updatable" });
     }
     if (isMainLayout && isLoggedIn && !user?.user?.emailVerified) {
-      message.error({
-        content: "Email not verified, check your mail for verification link!",
-      });
+      // message.error({
+      //   content: "Email not verified, check your mail for verification link!",
+      // });
     }
   }, [isLoggedIn, isMainLayout, navigate]);
   return (

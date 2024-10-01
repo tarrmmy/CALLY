@@ -5,8 +5,10 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import CustomRoutes from "./components/router";
 import { ConfigProvider } from "antd";
 
+
 const queryClient = new QueryClient();
 function App() {
+  
   return (
     <RecoilRoot>
       <Router>

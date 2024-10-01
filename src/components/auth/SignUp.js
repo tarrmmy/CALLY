@@ -1,28 +1,30 @@
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-} from "firebase/auth";
-import { auth } from "../../firebaseConfig";
-import { db } from "../../firebaseConfig";
+
 
 import register from "../../images/register.png";
 import { LogoText } from "../LogoText";
 import { Link } from "react-router-dom";
 import { Form, Input, Checkbox, notification } from "antd";
 import { useNavigate } from "react-router-dom";
-import { addDoc, collection } from "firebase/firestore";
+import { supabaseClient } from "../../supabase.config";
 
 const SignUp = () => {
   const [form] = Form.useForm();
-  const [api, contextHolder] = notification.useNotification();
+  // const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
 
  const blockWallet = async (userId) => {
   try {
-        const blockWallet = await addDoc(collection(db, 'wallets'), {
-          "user_id": userId,
-          "balance": 0
-        });
+    // const blockWallet = await addDoc(collection(db, 'wallets'), {
+    //   "user_id": userId,
+    //   "balance": 0
+    // });
+    const res = await supabaseClient
+    .from("wallets")
+    .insert({
+      'user_id': userId,
+      "balance": 0
+    })
+    console.log("UserBalance ::: ", res)
   } catch (error) {
     console.log(error, 'error')
   }
@@ -31,20 +33,23 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     if (e.password === e.confirm_password) {
       try {
-        await createUserWithEmailAndPassword(auth, e.email, e.password).then(
-          (res) => {
-            sendEmailVerification(auth.currentUser).then(() => {
-              console.log(auth.currentUser);
-              api.success({
-                message: "Account Created successfully!",
-                description: "Check your email for verification link to proceed, redirecting to login...",
-              });
-              blockWallet(auth.currentUser.uid);
-              navigate("/auth/verify-link");
-            });
+        supabaseClient.auth.signUp({
+          email: e.email,
+          password: e.password,
+        }).then((v) => {
+          if (!v.error) {
+            blockWallet(v.data.user.email);
+            // api.s
+            alert("Your account have been created successfully.")
+            navigate('/auth/sign-in')
+            return;
           }
-        );
-        alert("Verification email sent!");
+          // api.error({
+          //   message: "Registration Not Successful",
+          //   description: v.error.message
+          // })
+          alert(`${v.error.message}`)
+        })
       } catch (error) {
         console.log(error?.message);
       }
@@ -53,7 +58,7 @@ const SignUp = () => {
 
   return (
     <div className="flex">
-      {contextHolder}
+      {/* {contextHolder} */}
       <div className="absolute w-full flex justify-between items-center z-10 top-0 p-6 py-8">
         <LogoText />
       </div>

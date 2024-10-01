@@ -1,30 +1,48 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebaseConfig";
+
 import { useNavigate, Link } from "react-router-dom";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, notification } from "antd";
 import welcomeImg from "./../../images/SignIn.svg";
 import { LogoText } from "../LogoText";
 import logo from "../../images/logo1.png";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import authAtom from "../atoms/auth.atom";
+import { supabaseClient } from "../../supabase.config";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const setAuth = useSetRecoilState(authAtom);
+  // const [api, contextHolder] = notification.useNotification();
 
   const handleSignIn = async (e) => {
     console.log(e);
     const email = e.email;
     const password = e.password;
     try {
-      await signInWithEmailAndPassword(auth, email, password).then((res) => {
-        if (res) {
-          setAuth({ ...authAtom, isLoggedIn: true, user: res.user });
-          navigate("/main/welcome");
+      supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      }).then((v) => {
+        if (v.error) {
+          const {message} = v.error;
+          notification.error({
+            message: "Login failed",
+            description: message
+          })
+          return;
         }
-        console.log(res);
-      });
+        const {
+          user
+        } = v.data;
+        setAuth({ ...authAtom, isLoggedIn: true, user: user});
+        navigate("/main/welcome");
+      })
+      // await signInWithEmailAndPassword(auth, email, password).then((res) => {
+      //   if (res) {
+          
+      //   }
+      //   console.log(res);
+      // });
       // redirect after successful sign-in
     } catch (error) {
       console.error("Error signing in:", error.message);

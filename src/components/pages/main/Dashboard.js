@@ -1,10 +1,11 @@
-import { React, useEffect } from 'react';
+import { React, useEffect, useState } from 'react';
 import { Table, Card } from 'antd';
-import { where, query, getDocs } from "firebase/firestore";
-import * as firebaseAuth from "firebase/auth";
-import { auth, walletCollection } from "../../../firebaseConfig";
+// import { where, query, getDocs } from "firebase/firestore";
+// import * as firebaseAuth from "firebase/auth";
+// import { auth, walletCollection } from "../../../firebaseConfig";
 import authAtom from "../../atoms/auth.atom"
 import { useRecoilValue } from 'recoil';
+import { supabaseClient } from '../../../supabase.config';
 
 
 const Dashboard = () => {
@@ -12,91 +13,84 @@ const Dashboard = () => {
   const authAtomValue = useRecoilValue(authAtom)
   const columns = [
     {
-      title: 'Asset',
-      dataIndex: 'name',
+      title: 'Amount',
+      dataIndex: 'amount',
     },
     {
-      title: '',
-      dataIndex: 'age',
+      title: 'Type',
+      dataIndex: 'description',
     },
     {
-      title: '',
-      dataIndex: 'address',
+      title: 'Date',
+      dataIndex: 'created_at',
     },
+    {
+      title: 'Initiator',
+      dataIndex: 'user_id',
+    }
   ];
-  const data = [
-    {
-      key: '1',
-      name: 'LASUCoin',
-      age: '# 521.30',
-      address: 'New York No. 1 Lake Park',
-    },
-    {
-      key: '2',
-      name: 'CallyCoin',
-      age: '# 201.12',
-      address: 'London No. 1 Lake Park',
-    },
-    {
-      key: '3',
-      name: 'LASUCoin',
-      age: '# 680.22',
-      address: 'Sydney No. 1 Lake Park',
-    },
-    {
-      key: '4',
-      name: 'BitCoin',
-      age: '# 730.44',
-      address: 'Sydney No. 1 Lake Park',
-    },
-    {
-      key: '5',
-      name: 'Ethereum',
-      age: '#2,834.18',
-      address: 'Sydney No. 1 Lake Park',
-    },
-    {
-      key: '6',
-      name: 'BitCoin Cash',
-      age: '#730.44',
-      address: 'Sydney No. 1 Lake Park',
-    },
-  ]; 
+
+  const [balance, setBalance] = useState(0)
+  const [transactions, setTransactions] = useState([])
 
   const getWalletBalance = async () => {
-    auth.updateCurrentUser();
-    const user = authAtomValue.user.uid;
-    // auth.
-    console.log("User Data ::: ", user);
-    const q = query(walletCollection, where('user_id', '==', user ?? ""));
-    const snapshot = await getDocs(q);
-    console.log(snapshot.data);
+    try {
+
+      const user = await supabaseClient.auth.getUser();
+      console.log(user, "user ::: ")
+      const walletBalance = await supabaseClient
+        .from("wallets")
+        .select("balance")
+        .eq('user_id', user?.data?.user?.email)
+        .limit(1);
+      console.log("User Balance ::: ", walletBalance)
+      setBalance(walletBalance?.data[0]?.balance)
+    } catch(error) {
+      console.log("Error ", error)
+    }
+  }
+
+  const loadTransactions = async () => {
+    try {
+
+      const user = await supabaseClient?.auth?.getUser();
+      const transactions = await supabaseClient
+        .from("transactions")
+        .select("*")
+        .eq('user_id', user?.data?.user.email)
+        .order('created_at', {
+          ascending: false
+        })
+        .limit(5);
+        setTransactions(transactions.data ?? [])
+    } catch(error) {
+      console.log(
+        "Error ", error       )
+    }
   }
 
   useEffect(() => {
-    auth.authStateReady(async () => {
-      const user = await auth.currentUser;
-      if (user != undefined) {
-        getWalletBalance();
-      }
-    })
+    getWalletBalance();
+    loadTransactions();
   }, [])
 
   return (
     <div className='px-10'>
       <div className='flex'>
-        <div className='w-3/4'>
+        <div className='w-1/4'>
           <Card
             style={{
               width: 700,
             }}
           >
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>{ auth.currentUser }</p>
+            <h2>Wallet Balance </h2>
+            <h1 className='text-3xl'>
+              <span className='font-bold text-3xl mr-2'>{ balance }</span>
+              MJB Coin
+            </h1>
           </Card>
         </div>
-        <div className='w-1/4'>
+        {/* <div className='w-1/4'>
           <Card
             style={{
               width: 300,
@@ -106,10 +100,10 @@ const Dashboard = () => {
             <p>Card content</p>
             <p>Card content</p>
           </Card>
-        </div>
+        </div> */}
       </div>
       <div className='mt-4'>
-      <Table columns={columns} dataSource={data} size="middle" />   
+      <Table title={() => "Recent Transactions"} columns={columns} dataSource={transactions} size="middle" />   
       </div>
     </div>
   )
