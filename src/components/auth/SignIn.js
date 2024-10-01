@@ -35,7 +35,7 @@ const SignIn = () => {
           user
         } = v.data;
         setAuth({ ...authAtom, isLoggedIn: true, user: user});
-        navigate("/main/welcome");
+        navigate("/main/dashboard");
       })
       // await signInWithEmailAndPassword(auth, email, password).then((res) => {
       //   if (res) {

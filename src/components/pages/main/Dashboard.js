@@ -6,6 +6,7 @@ import { Table, Card } from 'antd';
 import authAtom from "../../atoms/auth.atom"
 import { useRecoilValue } from 'recoil';
 import { supabaseClient } from '../../../supabase.config';
+import moment from 'moment';
 
 
 const Dashboard = () => {
@@ -23,6 +24,11 @@ const Dashboard = () => {
     {
       title: 'Date',
       dataIndex: 'created_at',
+      render: (text) => {
+        // return <span dangerouslySetInnerHTML={{ __html: "anthsnjsn" }} />;
+        return <span dangerouslySetInnerHTML={{ __html: moment(text).format("LLLL") }} />;
+        // return <span dangerouslySetInnerHTML={{ __html: moment().format(text, "LLLL") }} />;
+      },
     },
     {
       title: 'Initiator',

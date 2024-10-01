@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, List, message } from 'antd';
 import VirtualList from 'rc-virtual-list';
 import CopyButton from '../../resusable component/CopyButton';
+import { supabaseClient } from '../../../supabase.config';
 const fakeDataUrl =
   'https://randomuser.me/api/?results=20&inc=name,gender,email,nat,picture&noinfo';
 const ContainerHeight = 400;
@@ -15,28 +16,31 @@ const Receive = () => {
         },
         {
             "title": "Email",
-            "value": "myemail@mailinator.com",
+            "value": "---",
             "id" :"2"
         }
     ]
   );
-//   const appendData = () => {
-//     fetch(fakeDataUrl)
-//       .then((res) => res.json())
-//       .then((body) => {
-//         setData(data.concat(body.results));
-//         message.success(`${body.results.length} more items loaded!`);
-//       });
-//   };
-//   useEffect(() => {
-//     appendData();
-//   }, []);
-//   const onScroll = (e) => {
-//     // Refer to: https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight#problems_and_solutions
-//     if (Math.abs(e.currentTarget.scrollHeight - e.currentTarget.scrollTop - ContainerHeight) <= 1) {
-//       appendData();
-//     }
-//   };
+  
+  useEffect(() => {
+    loadUserDetail();
+  }, [])
+  const loadUserDetail = async () => {
+    const user = await supabaseClient.auth.getUser();
+    setData( [
+      {
+          "title": "Wallet Address",
+          "value": "0x1337bEaTa45bFA88Dc9C6CFeB6e0BAAEdCD6eCdA",
+          "id" :"1"
+      },
+      {
+          "title": "Email",
+          "value": user.data.user.email,
+          "id" :"2"
+      }
+  ])
+  }
+
   return (
     <List>
       <VirtualList

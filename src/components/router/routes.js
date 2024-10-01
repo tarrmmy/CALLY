@@ -15,11 +15,11 @@ const WelcomePage = lazy(() => import("./../auth/welcome"));
 
 // Sidebars Pages
 const Dashboard = lazy(() => import("../pages/main/Dashboard"));
-const Wallet = lazy(() => import("../pages/main/wallet"));
+// const Wallet = lazy(() => import("../pages/main/wallet"));
 const SendReceive = lazy(() => import("../pages/main/sendNreceive"));
-const BuySell = lazy(() => import("../pages/main/BuyNSell"));
-const Transaction = lazy(() => import("../pages/main/Transaction"));
-const Contact = lazy(() => import("../pages/main/Contact"));
+// const BuySell = lazy(() => import("../pages/main/BuyNSell"));
+// const Transaction = lazy(() => import("../pages/main/Transaction"));
+// const Contact = lazy(() => import("../pages/main/Contact"));
 
 export const routes = [
   // main pages with no initial path
@@ -28,31 +28,27 @@ export const routes = [
     label: "Dashboard",
     component: <Dashboard />,
   },
-  {
-    path: "/main/wallet",
-    label: "Wallet",
-    component: <Wallet />,
-  },
+  // {
+  //   path: "/main/wallet",
+  //   label: "Wallet",
+  //   component: <Wallet />,
+  // },
   {
     path: "/main/send-receive",
     label: "Send/Receive",
     component: <SendReceive />,
   },
-  {
-    path: "/main/buy-sell",
-    label: "Buy/Sell",
-    component: <BuySell />,
-  },
-  {
-    path: "/main/transaction",
-    label: "Transaction",
-    component: <Transaction />,
-  },
-  {
-    path: "/main/contact",
-    label: "Contact",
-    component: <Contact />,
-  },
+  // {
+  //   path: "/main/buy-sell",
+  //   label: "Buy/Sell",
+  //   component: <BuySell />,
+  // },
+  // {
+  //   path: "/main/transaction",
+  //   label: "Transaction",
+  //   component: <Transaction />,
+  // },
+ 
 
   
   // authentication pages with initial path of /auth

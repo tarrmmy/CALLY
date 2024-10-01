@@ -3,11 +3,11 @@ import Logo from '../components/logo'
 import { Drawer, Menu } from 'antd'
 import { Link, useLocation } from 'react-router-dom'
 import dashboardIcon from '../images/icons/dashboard.svg'
-import walletIcon from '../images/icons/wallet.svg'
-import buyIcon from '../images/icons/buy.svg'
 import sendIcon from '../images/icons/send.svg'
-import transactionIcon from '../images/icons/transaction.svg'
-import contactIcon from '../images/icons/contact.svg'
+// import walletIcon from '../images/icons/wallet.svg'
+// import buyIcon from '../images/icons/buy.svg'
+// import transactionIcon from '../images/icons/transaction.svg'
+// import contactIcon from '../images/icons/contact.svg'
 
 function Sidebar({
   isOpen,
@@ -21,31 +21,31 @@ function Sidebar({
         label: <Link to="/main/dashboard">Dashboard</Link>,
         icon: <img alt='dashboard' src={dashboardIcon} />,
     },
-    {
-        key: "/wallet",
-        label: <Link to="/main/wallet">Wallet</Link>,
-        icon: <img alt='wallet' src={walletIcon} />,
-    },
+    // {
+    //     key: "/wallet",
+    //     label: <Link to="/main/wallet">Wallet</Link>,
+    //     icon: <img alt='wallet' src={walletIcon} />,
+    // },
     {
         key: "/send-receive",
         label: <Link to="/main/send-receive">Send/Receive</Link>,
         icon: <img alt='sendreceive' src={sendIcon} />,
     },
-    {
-        key: "/buy-sell",
-        label: <Link to="/main/buy-sell">Buy/Sell</Link>,
-        icon: <img alt='buysell' src={buyIcon} />,
-    },
-    {
-        key: "/transaction",
-        label: <Link to="/main/transaction">Transaction</Link>,
-        icon: <img alt='transaction' src={transactionIcon} />,
-    },
-    {
-        key: "/contact",
-        label: <Link to="/main/contact">Contact</Link>,
-        icon: <img alt='contact' src={contactIcon} />,
-    },
+    // {
+    //     key: "/buy-sell",
+    //     label: <Link to="/main/buy-sell">Buy/Sell</Link>,
+    //     icon: <img alt='buysell' src={buyIcon} />,
+    // },
+    // {
+    //     key: "/transaction",
+    //     label: <Link to="/main/transaction">Transaction</Link>,
+    //     icon: <img alt='transaction' src={transactionIcon} />,
+    // },
+    // {
+    //     key: "/contact",
+    //     label: <Link to="/main/contact">Contact</Link>,
+    //     icon: <img alt='contact' src={contactIcon} />,
+    // },
   ], []);
 
 const Content = () => (<div className='w-full h-full overflow-y-auto md:p-5 lg:px-2 space-y-5'>

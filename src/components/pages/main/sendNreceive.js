@@ -9,6 +9,7 @@ const SendNreceive = () => {
 
   // const [api, contextHolder] = notification();
 
+
   const onChange = (key) => {
     console.log(key);
   };
@@ -69,6 +70,9 @@ const SendNreceive = () => {
       })
     }
   };
+
+
+
 
 
 // Funding onFund
@@ -141,7 +145,9 @@ const onFund = async (values) => {
       label: 'Receive',
       children: (
         <div>
-          <h5>You can receive money through the following methods:</h5>
+          <i>
+            <h5 className='font-bold'>You can receive money through the following methods:</h5>
+          </i>
           <Receive />
         </div>
       ),
